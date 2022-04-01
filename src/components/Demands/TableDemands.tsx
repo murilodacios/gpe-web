@@ -104,7 +104,7 @@ export function TableDemands() {
                                     )) : <Text fontSize="xs" color="gray.500">Sem pessoas na demanda.</Text>}
                                 </Td>
                                 <Td>
-                                    <Box cursor="pointer" onClick={() => handleSeenAndPushToDemand(demand.id, user.id)}>
+                                    <Box cursor="pointer" onClick={() => handleSeenAndPushToDemand(demand.id, user!.id)}>
                                         <Icon as={RiEyeLine} />
                                     </Box>
                                 </Td>
@@ -129,7 +129,7 @@ export function TableDemands() {
                                         )) : <Text fontSize="xs" color="gray.500">Sem pessoas na demanda.</Text>}
                                     </Td>
                                     <Td>
-                                        <Box cursor="pointer" onClick={() => handleSeenAndPushToDemand(demand.id, user.id)}>
+                                        <Box cursor="pointer" onClick={() => handleSeenAndPushToDemand(demand.id, user!.id)}>
                                             <Icon as={RiEyeLine} />
                                         </Box>
                                     </Td>

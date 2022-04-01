@@ -13,7 +13,7 @@ type User = {
 }
 
 interface HomePainelProps {
-    user: User;
+    user: User | undefined;
 }
 
 export function HomePainel({ user }: HomePainelProps) {
