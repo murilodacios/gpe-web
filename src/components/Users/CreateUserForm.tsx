@@ -79,8 +79,8 @@ export function CreateUserForm() {
 
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='job'>Cargo</FormLabel>
-                            <Select required id='job' placeholder='Escolha um cargo' defaultValue="d7541a3c-42a5-4bfa-8ee1-6796268f718b" {...register("job_id")}>
-                                <option value="d7541a3c-42a5-4bfa-8ee1-6796268f718b">Comissionado</option>
+                            <Select required id='job' placeholder='Escolha um cargo' defaultValue="6673e5c6-b3b3-4c63-b120-e14ef6f83801" {...register("job_id")}>
+                                <option value="6673e5c6-b3b3-4c63-b120-e14ef6f83801">Comissionado</option>
                             </Select>
                         </FormControl>
                     </HStack>

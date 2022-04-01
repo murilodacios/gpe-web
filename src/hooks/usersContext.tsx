@@ -26,6 +26,7 @@ export const UsersContext = createContext({} as UsersContextData)
 export function UsersProvider({ children }: UsersProviderProps) {
 
     const [usersList, setUsersList] = useState<User[]>([])
+    const { isAuthenticated } = useAuthenticate()
 
     const cookies = parseCookies()
 
@@ -39,7 +40,7 @@ export function UsersProvider({ children }: UsersProviderProps) {
             })
         }
 
-    }, [])
+    }, [isAuthenticated])
 
     async function handleCreateNewUser(data: User): Promise<User | undefined> {
 

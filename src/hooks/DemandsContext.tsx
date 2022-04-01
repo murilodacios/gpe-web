@@ -76,6 +76,7 @@ export const DemandsContext = createContext({} as DemandsContextData)
 export function DemandsProvider({ children }: DemandsProviderProps) {
 
     const [demands, setDemands] = useState<Demands[]>([])
+    const { isAuthenticated } = useAuthenticate()
 
     const cookies = parseCookies()
 
@@ -89,7 +90,7 @@ export function DemandsProvider({ children }: DemandsProviderProps) {
             })
         }
 
-    }, [])
+    }, [isAuthenticated])
 
     async function handleCreateNewDemand(data: Demand): Promise<Demand | undefined> {
 

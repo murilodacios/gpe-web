@@ -1,5 +1,6 @@
 import { Input, Flex, Button, Stack, Text, Grid, Box, Icon, HStack, FormControl, FormLabel } from '@chakra-ui/react'
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 
 import Link from 'next/link'
@@ -32,6 +33,9 @@ export default function Login() {
 
   return (
     <>
+      <Head>
+        <title>GPE - Faça seu login</title>
+      </Head>
       <ToastContainer />
       <Stack w="100vw" h="100vh" align="center" justify="center">
         <Stack as="form" maxWidth={320} w="100%" spacing={4} onSubmit={handleSubmit}>
