@@ -30,12 +30,14 @@ export function CreateDemandForm() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = async (data: any) => {
-        const dataNew = {
-            ...data,
-            userId: user.id
-        }
+        if (user) {
+            const dataNew = {
+                ...data,
+                userId: user.id
+            }
 
-        await handleCreateNewDemand(dataNew)
+            await handleCreateNewDemand(dataNew)
+        }
     }
 
     return (
@@ -48,7 +50,7 @@ export function CreateDemandForm() {
                     <HStack align="center" py="4">
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='numero'>Número da demanda</FormLabel>
-                            <Input id='numero' type='text' {...register("numero")} required/>
+                            <Input id='numero' type='text' {...register("numero")} required />
                         </FormControl>
 
                         <FormControl>
@@ -62,19 +64,19 @@ export function CreateDemandForm() {
 
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='orgao_origem'>Orgão de origem</FormLabel>
-                            <Input required id='orgao_origem' type='text' {...register("orgao_origem")}/>
+                            <Input required id='orgao_origem' type='text' {...register("orgao_origem")} />
                         </FormControl>
                     </HStack>
 
                     <HStack align="center" pt="2">
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='remetente'>Nome do remetente</FormLabel>
-                            <Input required id='remetente' type='text' {...register("remetente")}/>
+                            <Input required id='remetente' type='text' {...register("remetente")} />
                         </FormControl>
 
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='assunto'>Breve resumo (Assunto)</FormLabel>
-                            <Input required id='assunto' type='text' {...register("assunto")}/>
+                            <Input required id='assunto' type='text' {...register("assunto")} />
                         </FormControl>
 
                     </HStack>
@@ -82,29 +84,29 @@ export function CreateDemandForm() {
                     <HStack align="center" pt="2">
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='setores'>Setores envolvidos</FormLabel>
-                            <Input required id='setores' type='text' {...register("setores")}/>
+                            <Input required id='setores' type='text' {...register("setores")} />
                         </FormControl>
 
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='processos'>Processos</FormLabel>
-                            <Input required id='processos' type='text' placeholder='Digite o processo fazendário' {...register("processos")}/>
+                            <Input required id='processos' type='text' placeholder='Digite o processo fazendário' {...register("processos")} />
                         </FormControl>
                     </HStack>
 
                     <HStack align="center" pt="4">
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='data_emissao'>Data de emissão</FormLabel>
-                            <Input required id='data_emissao' type='date' {...register("data_emissao")}/>
+                            <Input required id='data_emissao' type='date' {...register("data_emissao")} />
                         </FormControl>
 
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='data_recebimento'>Data de recebimento</FormLabel>
-                            <Input required id='data_recebimento' type='date' {...register("data_recebimento")}/>
+                            <Input required id='data_recebimento' type='date' {...register("data_recebimento")} />
                         </FormControl>
 
                         <FormControl>
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='prazo_resposta'>Prazo de resposta</FormLabel>
-                            <Input required id='prazo_resposta' type='date' {...register("prazo_resposta")}/>
+                            <Input required id='prazo_resposta' type='date' {...register("prazo_resposta")} />
                         </FormControl>
                     </HStack>
 
