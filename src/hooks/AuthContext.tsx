@@ -24,7 +24,7 @@ type AuthContextData = {
     signIn(credentials: SignInCredentials): Promise<void>;
     signOut(): Promise<void>;
     isAuthenticated: boolean;
-    user: User;
+    user: User | undefined;
 }
 
 export const AuthContext = createContext({} as AuthContextData)

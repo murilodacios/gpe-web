@@ -13,7 +13,7 @@ type User = {
 }
 
 interface SidebarProps {
-    user: User;
+    user: User | undefined;
 }
 
 export function Sidebar({ user }: SidebarProps) {

@@ -61,7 +61,7 @@ export function RecentsDemands() {
                         <HStack justify="space-between">
                             <HStack>
                                 {demand.users.length > 0 ? demand.users.map((demandUsers) => (
-                                    <Tooltip label={demandUsers.user.name}>
+                                    <Tooltip label={demandUsers.user.name} key={demandUsers.user.name}>
                                         <Avatar mr="-1" border="1px solid #fff" name={demandUsers.user.name} size="xs" key={demandUsers.user.name} />
                                     </Tooltip>
                                 )) : <Text fontSize="xs" color="gray.500">Sem pessoas na demanda.</Text>}

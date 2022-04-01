@@ -178,17 +178,6 @@ export default function Demanda() {
 
                                     ""
                                 }
-
-                                <Link href={`/demandas/imprimir/${demand?.id}`}>
-                                    <a target="_blank">
-                                        <Button colorScheme="green">
-                                            <HStack spacing="2">
-                                                <Icon as={RiPrinterLine} />
-                                                <Text>Imprimir</Text>
-                                            </HStack>
-                                        </Button>
-                                    </a>
-                                </Link>
                             </HStack>
 
                         </Stack>
