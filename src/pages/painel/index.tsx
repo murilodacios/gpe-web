@@ -17,10 +17,10 @@ export default function Painel() {
             <Head>
                 <title>Painel - Sistema eletrônico de demandas</title>
             </Head>
-            <Grid templateColumns='1fr 4fr'>
+            <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Página Inicial" description="Seu gerenciador de processos fazendários"/>
+                    <Header title="Página Inicial" description="Seu Gerenciador Público Eletrônico"/>
                     <HomePainel user={user}/>
                     
                 </Box>

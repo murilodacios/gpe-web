@@ -29,7 +29,7 @@ export function HomePainel({ user }: HomePainelProps) {
                     <Text fontSize="2xl">Bom trabalho, {user?.name.split(" ")[0]}.</Text>
                 </Stack>
 
-                <SimpleGrid columns={2} pt="8" gap="2">
+                <SimpleGrid columns={{base: 1, md: 2}} pt="8" gap="2">
 
                     <Box border="0.5px solid #eee">
 
@@ -58,12 +58,12 @@ export function HomePainel({ user }: HomePainelProps) {
                             </HStack>
 
 
-                            <HStack>
+                            <Stack direction={{base: "column", md: "row"}}>
 
                                 {user && user.level === 1 ?
                                     <Link href="/demandas/create">
                                         <a>
-                                            <Button variant="outline">
+                                            <Button variant="outline" w="100%">
                                                 <HStack spacing="2">
                                                     <Icon as={RiAddLine} />
                                                     <Text>Criar nova demanda</Text>
@@ -79,7 +79,7 @@ export function HomePainel({ user }: HomePainelProps) {
 
                                 <Link href="/demandas">
                                     <a>
-                                        <Button variant="outline">
+                                        <Button variant="outline" w="100%">
                                             <HStack spacing="2">
                                                 <Icon as={RiEye2Line} />
                                                 <Text>Ver demandas</Text>
@@ -87,7 +87,7 @@ export function HomePainel({ user }: HomePainelProps) {
                                         </Button>
                                     </a>
                                 </Link>
-                            </HStack>
+                            </Stack>
                         </Stack>
                     </Box>
 
@@ -102,7 +102,7 @@ export function HomePainel({ user }: HomePainelProps) {
                         </HStack>
 
 
-                        <HStack spacing="-2">
+                        <HStack spacing="-1" wrap="wrap">
                             {usersList.length > 0 ? usersList.map((users) => (
                                 <Tooltip key={users.name} label={users.name}>
                                     <Avatar border="1px solid #fff" name={users.name} size="sm" key={users.name} />
