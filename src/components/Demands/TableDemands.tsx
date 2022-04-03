@@ -78,7 +78,7 @@ export function TableDemands() {
 
                 <Stack d={{ base: "flex", md: "none" }}>
                     {!watch("searchdemand") ? demands.map((demand) => (
-                        <Stack border="1px solid #eee" p="4">
+                        <Stack border="1px solid #eee" p="4" key={demand.id}>
                             <Text><Text fontWeight="bold">{demand.tipo} {demand.numero}</Text>{demand.assunto}</Text>
                             <Text>{isTodayDate(demand.prazo_resposta) && demand.status !== "Respondido" ? <Tag colorScheme="red">Vence hoje</Tag> : demand?.status === null ? isPastedDate(demand.prazo_resposta) ? <Tag colorScheme="orange">Atrasado</Tag> : "Sem status" : <Tag colorScheme="green">{demand?.status}</Tag>}</Text>
                             <Text fontSize="sm">O prazo para responder esta demanda é {convertISOtoDate(demand.prazo_resposta)}</Text>
@@ -99,7 +99,7 @@ export function TableDemands() {
                     )) :
 
                         demands.filter(demand => demand.assunto.toLowerCase().includes(watch("searchdemand").toLowerCase())).map((demand) => (
-                            <Stack border="1px solid #eee" p="4">
+                            <Stack border="1px solid #eee" p="4" key={demand.id}>
                                 <Text><Text fontWeight="bold">{demand.tipo} {demand.numero}</Text>{demand.assunto}</Text>
                                 <Text>{isTodayDate(demand.prazo_resposta) && demand.status !== "Respondido" ? <Tag colorScheme="red">Vence hoje</Tag> : demand?.status === null ? isPastedDate(demand.prazo_resposta) ? <Tag colorScheme="orange">Atrasado</Tag> : "Sem status" : <Tag colorScheme="green">{demand?.status}</Tag>}</Text>
                                 <Text fontSize="sm">O prazo para responder esta demanda é {convertISOtoDate(demand.prazo_resposta)}</Text>
