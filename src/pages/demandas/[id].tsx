@@ -38,7 +38,7 @@ export default function Demanda() {
                 <title>Única demanda - Sistema Eletrônico de Demandas</title>
             </Head>
             <ToastContainer />
-            <Grid templateColumns='1fr 4fr'>
+            <Grid templateColumns={{ base: '1fr', md: '1fr 4fr' }}>
                 <Sidebar user={user} />
                 <Box>
                     <Header title="Controle Público e PGM" description="Controle de demandas do Ministério Público e PGM" />
@@ -48,11 +48,10 @@ export default function Demanda() {
 
                             <HStack py="5">
                                 <Icon as={RiEyeLine} color="gray.500" />
-                                <Text color="gray.500">Visualizando única demanda</Text>
                                 <Text color="gray.600">
                                     <Link href={`/demandas`}>
                                         <a>
-                                            <Text> - Voltar à lista</Text>
+                                            <Text>Voltar à lista</Text>
                                         </a>
                                     </Link>
                                 </Text>
@@ -62,7 +61,8 @@ export default function Demanda() {
                                 <Text fontSize="16">{demand?.tipo} {demand?.numero} - {demand?.assunto}</Text>
                             </HStack>
 
-                            <HStack spacing="4">
+                            <Stack spacing="4" direction={{ base: "column", md: "row" }}>
+
                                 <Stack spacing="0.5">
                                     <Text fontSize="12" color="gray.500">Setor responsável</Text>
                                     <Text fontSize="14">{demand?.setores}</Text>
@@ -88,13 +88,13 @@ export default function Demanda() {
                                 </Stack>
 
 
-                            </HStack>
+                            </Stack>
 
                             <Text fontSize="14" color="gray.500">O prazo para responder esta demanda é até dia {convertISOtoDate(demand.prazo_resposta)}. {isTodayDate(demand.prazo_resposta) ? "E o prazo vence hoje!" : ""}</Text>
 
 
 
-                            <HStack justify="space-between">
+                            <Stack justify="space-between" direction={{ base: "column", md: "row" }}>
                                 <Stack>
                                     <Text fontSize="14" color="gray.700">Pessoas nesta demanda</Text>
                                     <HStack spacing="-2">
@@ -126,7 +126,7 @@ export default function Demanda() {
                                         <Text fontSize="xs" color="gray.500">Recebido dia {convertISOtoDate(demand.data_recebimento)}</Text>
                                     </HStack>
                                 </HStack>
-                            </HStack>
+                            </Stack>
 
                             <Stack pt="6">
                                 <Text>Anotações</Text>
@@ -149,7 +149,7 @@ export default function Demanda() {
                                 </Stack>
                             </Stack>
 
-                            <HStack pt="8">
+                            <Stack pt="8" direction={{ base: "column", md: "row" }}>
                                 {user && user.level === 1 ?
                                     <Button onClick={() => handleCheckResponse(demand?.id)} colorScheme="green" variant={demand?.data_resposta === null ? "solid" : "outline"}>
                                         <HStack spacing="2">
@@ -178,7 +178,7 @@ export default function Demanda() {
 
                                     ""
                                 }
-                            </HStack>
+                            </Stack>
 
                         </Stack>
                     ))}
