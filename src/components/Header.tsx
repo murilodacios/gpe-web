@@ -7,7 +7,8 @@ import {
     MenuItemOption,
     MenuGroup,
     MenuOptionGroup,
-    MenuDivider
+    MenuDivider,
+    Link
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -58,6 +59,7 @@ export function Header({ title, description }: HeaderProps) {
                             <Avatar name={user?.name} size="sm" />
                         </MenuButton>
                         <MenuList>
+                            <MenuItem onClick={handleSignOut}><Link href="/">Painel</Link></MenuItem>
                             <MenuItem onClick={handleSignOut}><Text>Sair</Text></MenuItem>
                         </MenuList>
                     </Menu>

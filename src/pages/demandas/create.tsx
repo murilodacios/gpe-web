@@ -19,7 +19,7 @@ export default function CreateDemand() {
             <Head>
                 <title>Criar nova demanda - Sistema Eletrônico de Demandas</title>
             </Head>
-            <Grid templateColumns='1fr 4fr'>
+            <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />
                 <Box>
                     <Header title="Controle Público e PGM" description="Controle de demandas do Ministério Público e PGM" />
