@@ -19,6 +19,7 @@ import {
     InputGroup,
     InputLeftAddon,
     Button,
+    Divider,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -75,7 +76,53 @@ export function TableDemands() {
                     <Input type='text' placeholder='Busca por assunto' {...register("searchdemand")} />
                 </HStack>
 
-                <Table variant='simple'>
+                <Stack d={{ base: "flex", md: "none" }}>
+                    {!watch("searchdemand") ? demands.map((demand) => (
+                        <Stack border="1px solid #eee" p="4">
+                            <Text><Text fontWeight="bold">{demand.tipo} {demand.numero}</Text>{demand.assunto}</Text>
+                            <Text>{isTodayDate(demand.prazo_resposta) && demand.status !== "Respondido" ? <Tag colorScheme="red">Vence hoje</Tag> : demand?.status === null ? isPastedDate(demand.prazo_resposta) ? <Tag colorScheme="orange">Atrasado</Tag> : "Sem status" : <Tag colorScheme="green">{demand?.status}</Tag>}</Text>
+                            <Text fontSize="sm">O prazo para responder esta demanda é {convertISOtoDate(demand.prazo_resposta)}</Text>
+                            <Text color="gray.500">Pessoas na demanda</Text>
+                            <Box>
+                                {demand.users.length > 0 ? demand.users.map((demandUsers) => (
+                                    <Tooltip key={demandUsers.user.name} label={demandUsers.user.name}>
+                                        <Avatar mr="-3" border="1px solid #fff" name={demandUsers.user.name} size="xs" key={demandUsers.user.name} />
+                                    </Tooltip>
+                                )) : <Text fontSize="xs" color="gray.500">Sem pessoas na demanda.</Text>}
+                            </Box>
+                            <Divider />
+                            <HStack color="gray.500" cursor="pointer" onClick={() => handleSeenAndPushToDemand(demand.id, user!.id)}>
+                                <Icon as={RiEyeLine} />
+                                <Text>Abrir demanda</Text>
+                            </HStack>
+                        </Stack>
+                    )) :
+
+                        demands.filter(demand => demand.assunto.toLowerCase().includes(watch("searchdemand").toLowerCase())).map((demand) => (
+                            <Stack border="1px solid #eee" p="4">
+                                <Text><Text fontWeight="bold">{demand.tipo} {demand.numero}</Text>{demand.assunto}</Text>
+                                <Text>{isTodayDate(demand.prazo_resposta) && demand.status !== "Respondido" ? <Tag colorScheme="red">Vence hoje</Tag> : demand?.status === null ? isPastedDate(demand.prazo_resposta) ? <Tag colorScheme="orange">Atrasado</Tag> : "Sem status" : <Tag colorScheme="green">{demand?.status}</Tag>}</Text>
+                                <Text fontSize="sm">O prazo para responder esta demanda é {convertISOtoDate(demand.prazo_resposta)}</Text>
+                                <Text color="gray.500">Pessoas na demanda</Text>
+                                <Box>
+                                    {demand.users.length > 0 ? demand.users.map((demandUsers) => (
+                                        <Tooltip key={demandUsers.user.name} label={demandUsers.user.name}>
+                                            <Avatar mr="-3" border="1px solid #fff" name={demandUsers.user.name} size="xs" key={demandUsers.user.name} />
+                                        </Tooltip>
+                                    )) : <Text fontSize="xs" color="gray.500">Sem pessoas na demanda.</Text>}
+                                </Box>
+                                <Divider />
+                                <HStack color="gray.500" cursor="pointer" onClick={() => handleSeenAndPushToDemand(demand.id, user!.id)}>
+                                    <Icon as={RiEyeLine} />
+                                    <Text>Abrir demanda</Text>
+                                </HStack>
+                            </Stack>
+                        ))
+
+                    }
+                </Stack>
+
+                <Table variant='simple' d={{ base: "none", md: "inline" }}>
                     <Thead>
                         <Tr>
                             <Th>Assunto</Th>
