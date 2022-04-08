@@ -15,7 +15,7 @@ export default function Painel() {
     return (
         <>
             <Head>
-                <title>Painel - Sistema eletrônico de demandas</title>
+                <title>Painel - Gerenciador Público Eletrônico</title>
             </Head>
             <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />

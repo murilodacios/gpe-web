@@ -17,7 +17,7 @@ export default function CreateDemand() {
     return (
         <>
             <Head>
-                <title>Criar nova demanda - Sistema Eletrônico de Demandas</title>
+                <title>Criar nova demanda - Gerenciador Público Eletrônico</title>
             </Head>
             <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />

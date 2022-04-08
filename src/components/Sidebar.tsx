@@ -22,7 +22,7 @@ export function Sidebar({ user }: SidebarProps) {
         <>
             <Stack w="100%" borderRight="0.5px solid #eee" height="100%" d={{base: "none", md: "flex"}}>
                 <Stack spacing="4" p="8" align="center" bg="blue.500" w="100%" color="white">
-                   <Text fontWeight="medium">Sistema Eletrônico de Demandas</Text>
+                   <Text fontWeight="medium">Gerenciador Público Eletrônico</Text>
                 </Stack>
 
                 <Stack align="flex-start" spacing="2" py="6">

@@ -17,7 +17,7 @@ export default function CreateUser() {
     return (
         <>
             <Head>
-                <title>Criar novo usuário - Sistema Eletrônico de Demandas</title>
+                <title>Criar novo usuário - Gerenciador Público Eletrônico</title>
             </Head>
 
             <Grid templateColumns='1fr 4fr'>

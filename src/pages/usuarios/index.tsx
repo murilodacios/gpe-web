@@ -16,7 +16,7 @@ export default function Usuarios() {
     return (
         <>
             <Head>
-                <title>Usuários - Sistema Eletrônico de Demandas</title>
+                <title>Usuários - Gerenciador Público Eletrônico</title>
             </Head>
 
             <Grid templateColumns='1fr 4fr'>

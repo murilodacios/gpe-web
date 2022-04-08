@@ -16,7 +16,7 @@ export default function Demandas() {
     return (
         <>
             <Head>
-                <title>Controle público - Sistema Eletrônico de Demandas</title>
+                <title>Controle público - Gerenciador Público Eletrônico</title>
             </Head>
             <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />

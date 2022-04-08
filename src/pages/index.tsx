@@ -1,4 +1,4 @@
-import { Input, Flex, Button, Stack, Text, Grid, Box, Icon, HStack, FormControl, FormLabel } from '@chakra-ui/react'
+import { Input, Flex, Button, Stack, Text, Grid, Box, Icon, HStack, FormControl, FormLabel, SimpleGrid } from '@chakra-ui/react'
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
@@ -37,20 +37,27 @@ export default function Login() {
         <title>GPE - Faça seu login</title>
       </Head>
       <ToastContainer />
-      <Stack w="100vw" h="100vh" align="center" justify="center">
-        <Stack as="form" maxWidth={320} w="100%" spacing={4} onSubmit={handleSubmit}>
-          <FormControl>
-            <FormLabel htmlFor="email" fontSize="sm" color="gray.500">E-mail</FormLabel>
-            <Input type="email" id="email" name="email" colorScheme="teal" onChange={e => setEmail(e.target.value)} />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="password" fontSize="sm" color="gray.500">Sua senha</FormLabel>
-            <Input type="password" id="password" name="password" colorScheme="teal" onChange={e => setPassword(e.target.value)} />
-          </FormControl>
-          <Button type="submit" colorScheme="teal">Entrar</Button>
 
+      <SimpleGrid columns={{ base: 1, md: 2 }}>
+        <Stack w="100%" h="100vh" align="center" justify="center" p="4">
+          <Stack as="form" maxWidth={520} w="100%" spacing={4} onSubmit={handleSubmit}>
+            <FormControl>
+              <FormLabel htmlFor="email" fontSize="sm" color="gray.500">E-mail</FormLabel>
+              <Input type="email" borderRadius="2" id="email" name="email" colorScheme="teal" onChange={e => setEmail(e.target.value)} />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password" fontSize="sm" color="gray.500">Sua senha</FormLabel>
+              <Input type="password" borderRadius="2" id="password" name="password" colorScheme="teal" onChange={e => setPassword(e.target.value)} />
+            </FormControl>
+            <Button type="submit" borderRadius="2" colorScheme="teal">Entrar</Button>
+
+          </Stack>
         </Stack>
-      </Stack>
+
+        <Stack w="100%" h="100vh" align="center" justify="center" bg="teal" color="#fff" d={{ base: "none", md: "flex" }}>
+          {/* <Text>oi</Text> */}
+        </Stack>
+      </SimpleGrid>
 
 
 

@@ -35,7 +35,7 @@ export default function Demanda() {
     return (
         <>
             <Head>
-                <title>Única demanda - Sistema Eletrônico de Demandas</title>
+                <title>Única demanda - Gerenciador Público Eletrônico</title>
             </Head>
             <ToastContainer />
             <Grid templateColumns={{ base: '1fr', md: '1fr 4fr' }}>
