@@ -4,6 +4,7 @@ import { theme } from '../styles/theme'
 import { AuthProvider } from '../hooks/AuthContext'
 import { DemandsProvider } from '../hooks/DemandsContext'
 import { UsersProvider } from '../hooks/usersContext'
+import { TasksProvider } from '../hooks/tasksContext'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -12,9 +13,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <UsersProvider>
         <DemandsProvider>
-          <ChakraProvider theme={theme}>
-            <Component {...pageProps} />
-          </ChakraProvider>
+          <TasksProvider>
+            <ChakraProvider theme={theme}>
+              <Component {...pageProps} />
+            </ChakraProvider>
+          </TasksProvider>
         </DemandsProvider>
       </UsersProvider>
     </AuthProvider>

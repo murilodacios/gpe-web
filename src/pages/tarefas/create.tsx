@@ -5,12 +5,11 @@ import { Box, Grid } from '@chakra-ui/react'
 import { Sidebar } from '../../components/Sidebar'
 import { Header } from '../../components/Header'
 import { useAuthenticate } from '../../hooks/AuthContext'
-import { CreateDemandForm } from '../../components/Demands/CreateDemandForm'
-import { CreateUserForm } from '../../components/Users/CreateUserForm'
 import Head from 'next/head'
+import { CreateTaskForm } from '../../components/Tasks/CreateTaskForm'
 
 
-export default function CreateUser() {
+export default function CreateTask() {
 
     const { user } = useAuthenticate()
 
@@ -23,8 +22,8 @@ export default function CreateUser() {
             <Grid templateColumns='1fr 4fr'>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Usuários" description="Gerencie os usuários do seu setor"/>
-                    <CreateUserForm />
+                    <Header title="Criar tarefa" description="Crie metas diárias em formato de tarefas"/>
+                    <CreateTaskForm />
                 </Box>
             </Grid>
 
