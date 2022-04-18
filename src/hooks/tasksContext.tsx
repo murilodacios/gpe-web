@@ -44,7 +44,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
             })
         }
 
-    }, [isAuthenticated])
+    }, [user])
 
     async function handleCreateNewTask(description: string): Promise<Task | undefined> {
 
