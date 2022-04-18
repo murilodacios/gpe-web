@@ -1,8 +1,14 @@
 import { Avatar, Box, Button, HStack, Icon, SimpleGrid, Stack, Text, Tooltip } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { RiAddLine, RiErrorWarningLine, RiEye2Line, RiUserLine } from "react-icons/ri";
+import { RiAddLine, RiErrorWarningLine, RiEye2Line, RiListUnordered, RiTaskLine, RiUserLine } from "react-icons/ri";
 import { useDemands } from "../../hooks/DemandsContext";
+import { useTasks } from "../../hooks/tasksContext";
 import { useUsers } from "../../hooks/usersContext";
+
+const Chart = dynamic(() => import('react-apexcharts'), {
+    ssr: false
+})
 
 
 type User = {
@@ -20,7 +26,9 @@ export function HomePainel({ user }: HomePainelProps) {
 
     const { demands } = useDemands()
     const { usersList } = useUsers()
+    const { tasks } = useTasks()
 
+   
     return (
         <>
             <Stack w="100%" height="100vh" p="6">
@@ -29,7 +37,7 @@ export function HomePainel({ user }: HomePainelProps) {
                     <Text fontSize="2xl">Bom trabalho, {user?.name.split(" ")[0]}.</Text>
                 </Stack>
 
-                <SimpleGrid columns={{base: 1, md: 2}} pt="8" gap="2">
+                <SimpleGrid columns={{ base: 1, md: 2 }} pt="8" gap="2">
 
                     <Box border="0.5px solid #eee">
 
@@ -58,7 +66,7 @@ export function HomePainel({ user }: HomePainelProps) {
                             </HStack>
 
 
-                            <Stack direction={{base: "column", md: "row"}}>
+                            <Stack direction={{ base: "column", md: "row" }}>
 
                                 {user && user.level === 1 ?
                                     <Link href="/demandas/create">
@@ -111,6 +119,23 @@ export function HomePainel({ user }: HomePainelProps) {
                         </HStack>
 
                     </Stack>
+
+
+                    <Stack border="0.5px solid #eee" p="6" mb="6">
+
+                        <HStack>
+                            <Icon as={RiListUnordered} />
+                            <Text>Minhas tarefas</Text>
+                        </HStack>
+                        <HStack>
+                            <Text>Você tem {tasks.length} tarefa(s) na sua lista diária.
+                            </Text>
+                        </HStack>
+
+                       
+
+                    </Stack>
+
                 </SimpleGrid>
 
             </Stack>

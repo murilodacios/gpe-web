@@ -20,11 +20,12 @@ import {
     InputLeftAddon,
     Button,
     Checkbox,
+    IconButton,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { RiAddLine, RiCheckLine, RiEyeLine, RiSearchLine } from "react-icons/ri";
+import { RiAddLine, RiCheckLine, RiDeleteBackFill, RiDeleteBin7Line, RiEyeLine, RiSearchLine } from "react-icons/ri";
 import { useAuthenticate } from "../../hooks/AuthContext";
 import { useTasks } from "../../hooks/tasksContext";
 import { useUsers } from "../../hooks/usersContext";
@@ -37,10 +38,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export function TableTasks() {
 
-    const { tasks, checkTask } = useTasks()
+    const { tasks, checkTask, removeTask } = useTasks()
 
     async function handleCheckTask(id: string) {
         await checkTask(id)
+    }
+
+    async function handleRemoveTask(id: string) {
+        await removeTask(id)
     }
 
     return (
@@ -68,6 +73,7 @@ export function TableTasks() {
                         <Tr>
                             <Th>Descrição</Th>
                             <Th>Criado em</Th>
+                            <Th>Feito</Th>
                             <Th>Ação</Th>
                         </Tr>
                     </Thead>
@@ -81,6 +87,9 @@ export function TableTasks() {
                                     <Checkbox colorScheme='blue' defaultIsChecked={task.completed ? true : false} onChange={() => handleCheckTask(task.id)}>
                                         Concluir
                                     </Checkbox>
+                                </Td>
+                                <Td>
+                                    <Icon as={RiDeleteBin7Line} cursor="pointer" fontSize="16" _hover={{color: "red.500"}} onClick={() => handleRemoveTask(task.id)}/>
                                 </Td>
                             </Tr>
                         ))

@@ -21,6 +21,7 @@ type TasksContextData = {
     tasks: Task[];
     handleCreateNewTask(description: string): Promise<Task | undefined>;
     checkTask(id: string): Promise<void>;
+    removeTask(id: string): Promise<void>;
 }
 
 export const TasksContext = createContext({} as TasksContextData)
@@ -85,21 +86,28 @@ export function TasksProvider({ children }: TasksProviderProps) {
                 return atualTask
             })
 
-            toast.success("Ação realizada com sucesso")
-
             setTasks([...updatedTask])
-
 
         } catch {
             toast.error("Não foi possível marcar a tarefa como concluída.")
         }
     }
 
+    async function removeTask(id: string): Promise<void> {
+        try {
+            await api.delete(`/tasks/delete/${id}`)
 
+            const updatedTasks = tasks.filter(task => task.id !== id) 
+            
+            setTasks([...updatedTasks])
+        } catch {
+            toast.error("Não foi possível deletar a tarefa")
+        }
+    }
 
 
     return (
-        <TasksContext.Provider value={{ tasks, handleCreateNewTask, checkTask }}>
+        <TasksContext.Provider value={{ tasks, handleCreateNewTask, checkTask, removeTask }}>
             {children}
         </TasksContext.Provider>
     )
