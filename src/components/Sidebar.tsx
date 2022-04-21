@@ -1,8 +1,5 @@
-import { Avatar, Box, HStack, Icon, Stack, Text } from "@chakra-ui/react";
-import Router from "next/router";
-import { RiEye2Line, RiHome2Line, RiListCheck, RiPencilLine, RiUserLine } from 'react-icons/ri'
-import { toast } from "react-toastify";
-import { useAuthenticate } from "../hooks/AuthContext";
+import { HStack, Icon, Stack, Text } from "@chakra-ui/react";
+import { RiEye2Line, RiHome2Line, RiListCheck, RiMoneyDollarCircleLine, RiPencilLine, RiUserLine } from 'react-icons/ri'
 import { ActiveLink } from "./ActiveLink";
 
 type User = {
@@ -61,6 +58,17 @@ export function Sidebar({ user }: SidebarProps) {
                                 <HStack>
                                     <Icon as={RiEye2Line} fontSize="20" />
                                     <Text>Controle público</Text>
+                                </HStack>
+                            </ActiveLink>
+                        </Text>
+                    </HStack>
+
+                    <HStack px="6" py="2" spacing="6" _hover={{ bg: "gray.50" }} w="100%">
+                        <Text fontSize="17">
+                            <ActiveLink href="/pagamentos">
+                                <HStack>
+                                    <Icon as={RiMoneyDollarCircleLine} fontSize="20" />
+                                    <Text>Pagamentos</Text>
                                 </HStack>
                             </ActiveLink>
                         </Text>

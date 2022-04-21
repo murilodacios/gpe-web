@@ -8,7 +8,7 @@ import { AddAnotationToDemandModal } from '../../components/Demands/Modals/AddAn
 import { useAuthenticate } from '../../hooks/AuthContext'
 import { useDemands } from '../../hooks/DemandsContext'
 import Link from 'next/link'
-import { RiCheckLine, RiEyeLine, RiPrinterLine } from 'react-icons/ri'
+import { RiCheckLine, RiEyeLine } from 'react-icons/ri'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
@@ -16,7 +16,6 @@ import { AddPeopleToDemand } from '../../components/Demands/AddPeopleToDemand'
 import { convertISOtoDate } from '../../utils/convertISOtoDate'
 import { isTodayDate } from '../../utils/isTodayDate'
 import { isPastedDate } from '../../utils/isPastedDate'
-import { useEffect } from 'react'
 import Head from 'next/head'
 
 export default function Demanda() {

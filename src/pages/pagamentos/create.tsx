@@ -5,24 +5,24 @@ import { Box, Grid } from '@chakra-ui/react'
 import { Sidebar } from '../../components/Sidebar'
 import { Header } from '../../components/Header'
 import { useAuthenticate } from '../../hooks/AuthContext'
-import { TableDemands } from '../../components/Demands/TableDemands'
 import Head from 'next/head'
+import { CreatePaymentForm } from '../../components/Payments/CreatePaymentForm'
 
 
-export default function Demandas() {
+export default function CreatePayment() {
 
     const { user } = useAuthenticate()
 
     return (
         <>
             <Head>
-                <title>Controle público - Gerenciador Público Eletrônico</title>
+                <title>Criar novo pagamento - Gerenciador Público Eletrônico</title>
             </Head>
             <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Controle Público e PGM" description="Controle de demandas do Ministério Público e PGM"/>
-                    <TableDemands />
+                    <Header title="Crie um novo pagamento" description="Controle de pagamento de fornecedores" />
+                    <CreatePaymentForm />
                 </Box>
             </Grid>
 

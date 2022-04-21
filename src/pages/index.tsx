@@ -9,8 +9,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../hooks/AuthContext';
 
-
-
 export default function Login() {
 
   const [email, setEmail] = useState('');

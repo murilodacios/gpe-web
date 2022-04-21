@@ -9,22 +9,18 @@ import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     Tag,
     Input,
-    InputGroup,
-    InputLeftAddon,
     Button,
     Divider,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { RiAddLine, RiCheckLine, RiEyeLine, RiSearchLine } from "react-icons/ri";
+import { RiAddLine, RiEyeLine } from "react-icons/ri";
 import { useAuthenticate } from "../../hooks/AuthContext";
 import { useDemands } from "../../hooks/DemandsContext";
 import { convertISOtoDate } from "../../utils/convertISOtoDate";
@@ -122,7 +118,7 @@ export function TableDemands() {
                     }
                 </Stack>
 
-                <Table variant='simple' d={{ base: "none", md: "inline" }}>
+                <Table variant='simple' d={{ base: "none", md: "table" }} w="100%">
                     <Thead>
                         <Tr>
                             <Th>Assunto</Th>

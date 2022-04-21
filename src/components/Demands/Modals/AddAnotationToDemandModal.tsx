@@ -1,21 +1,10 @@
 import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
     Button,
-    Avatar,
     HStack,
-    Text,
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
@@ -23,16 +12,10 @@ import {
     FormControl,
     FormLabel,
     Input,
-    FormHelperText,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
-import { RiArrowDownLine } from 'react-icons/ri';
 import { useDemands } from '../../../hooks/DemandsContext';
-import { useUsers } from '../../../hooks/usersContext';
 
-type Users = {
-    name: string;
-}
 
 interface AddAnotationProps {
     id: string;

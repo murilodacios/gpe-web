@@ -5,7 +5,6 @@ import { Box, Grid, GridItem } from '@chakra-ui/react'
 import { Sidebar } from '../../components/Sidebar'
 import { Header } from '../../components/Header'
 import { useAuthenticate } from '../../hooks/AuthContext'
-import { TableDemands } from '../../components/Demands/TableDemands'
 import { CreateDemandForm } from '../../components/Demands/CreateDemandForm'
 import Head from 'next/head'
 

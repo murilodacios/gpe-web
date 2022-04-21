@@ -1,28 +1,28 @@
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
+import { useAuthenticate } from '../../hooks/AuthContext'
 
 import { Box, Grid } from '@chakra-ui/react'
 import { Sidebar } from '../../components/Sidebar'
 import { Header } from '../../components/Header'
-import { useAuthenticate } from '../../hooks/AuthContext'
-import { TableDemands } from '../../components/Demands/TableDemands'
 import Head from 'next/head'
+import { TableTasks } from '../../components/Tasks/TableTasks'
+import { TablePayments } from '../../components/Payments/TablePayments'
 
-
-export default function Demandas() {
+export default function Pagamentos() {
 
     const { user } = useAuthenticate()
 
     return (
         <>
             <Head>
-                <title>Controle público - Gerenciador Público Eletrônico</title>
+                <title>Pagamentos - Gerenciador Público Eletrônico</title>
             </Head>
             <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Controle Público e PGM" description="Controle de demandas do Ministério Público e PGM"/>
-                    <TableDemands />
+                    <Header title="Pagamentos" description="Relatório de fornecedores"/>
+                    <TablePayments />
                 </Box>
             </Grid>
 

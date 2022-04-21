@@ -1,37 +1,22 @@
 import {
-    Avatar,
-    Box,
     HStack,
     Icon,
     Stack,
     Text,
-    Tooltip,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
-    Tag,
-    Input,
-    InputGroup,
-    InputLeftAddon,
     Button,
     Checkbox,
-    IconButton,
+
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { RiAddLine, RiCheckLine, RiDeleteBackFill, RiDeleteBin7Line, RiEyeLine, RiSearchLine } from "react-icons/ri";
-import { useAuthenticate } from "../../hooks/AuthContext";
+import { RiAddLine, RiDeleteBin7Line,  } from "react-icons/ri";
 import { useTasks } from "../../hooks/tasksContext";
-import { useUsers } from "../../hooks/usersContext";
 import { convertISOtoDate } from "../../utils/convertISOtoDate";
-import { isPastedDate } from "../../utils/isPastedDate";
-import { isTodayDate } from "../../utils/isTodayDate";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

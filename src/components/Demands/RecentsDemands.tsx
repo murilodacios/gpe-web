@@ -1,4 +1,4 @@
-import { Avatar, Box, HStack, Icon, Stack, Tag, Text, Tooltip } from "@chakra-ui/react";
+import { Avatar, HStack, Icon, Stack, Tag, Text, Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 import { RiEyeLine } from "react-icons/ri";
 import { useDemands } from "../../hooks/DemandsContext";

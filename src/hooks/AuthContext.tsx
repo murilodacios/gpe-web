@@ -92,9 +92,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
             //@ts-ignore
             api.defaults.headers['Authorization'] = `Bearer ${token}`
 
-            Router.push('/painel')
-
             setUser(user)
+
+            Router.push('/painel')
 
         } catch (err) {
 

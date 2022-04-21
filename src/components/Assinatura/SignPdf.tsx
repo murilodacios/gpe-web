@@ -1,13 +1,8 @@
 import {
     Box,
     Button,
-    FormControl,
-    FormLabel,
     HStack,
     Input,
-    Stack,
-    Text,
-
 } from "@chakra-ui/react";
 import fileToArrayBuffer from "file-to-array-buffer";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";

@@ -112,7 +112,7 @@ export function HomePainel({ user }: HomePainelProps) {
 
                         <HStack spacing="-1" wrap="wrap">
                             {usersList.length > 0 ? usersList.map((users) => (
-                                <Tooltip key={users.name} label={users.name}>
+                                <Tooltip key={users.id} label={users.name}>
                                     <Avatar border="1px solid #fff" name={users.name} size="sm" key={users.name} />
                                 </Tooltip>
                             )) : <Text fontSize="xs" color="gray.500">Sem pessoas na demanda.</Text>}

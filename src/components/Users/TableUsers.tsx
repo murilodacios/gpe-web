@@ -1,35 +1,20 @@
 import {
-    Avatar,
-    Box,
     HStack,
     Icon,
     Stack,
     Text,
-    Tooltip,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
-    Tag,
-    Input,
-    InputGroup,
-    InputLeftAddon,
     Button,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { RiAddLine, RiCheckLine, RiEyeLine, RiSearchLine } from "react-icons/ri";
+import { RiAddLine } from "react-icons/ri";
 import { useAuthenticate } from "../../hooks/AuthContext";
 import { useUsers } from "../../hooks/usersContext";
-import { convertISOtoDate } from "../../utils/convertISOtoDate";
-import { isPastedDate } from "../../utils/isPastedDate";
-import { isTodayDate } from "../../utils/isTodayDate";
-
 
 export function TableUsers() {
 

@@ -16,9 +16,6 @@ import { RiArrowDownLine } from 'react-icons/ri';
 import { useDemands } from '../../hooks/DemandsContext';
 import { useUsers } from '../../hooks/usersContext';
 
-type Users = {
-    name: string;
-}
 
 interface AddPeopleProps {
     demandId: string;
