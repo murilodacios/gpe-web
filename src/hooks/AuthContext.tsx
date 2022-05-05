@@ -25,6 +25,7 @@ type AuthContextData = {
     signOut(): Promise<void>;
     isAuthenticated: boolean;
     user: User | undefined;
+    loadingLogin: boolean;
 }
 
 export const AuthContext = createContext({} as AuthContextData)
@@ -32,6 +33,8 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthProvider({ children }: AuthProviderProps) {
 
     const [user, setUser] = useState<User>()
+
+    const [loadingLogin, setLoadingLogin] = useState(false)
 
     const isAuthenticated = !!user
 
@@ -51,6 +54,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
                     setUser({ email, name, level, id })
 
+                    setLoadingLogin(false)
+
                 })
 
 
@@ -69,6 +74,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     async function signIn({ email, password }: SignInCredentials) {
+
+        setLoadingLogin(true)
 
         try {
 
@@ -108,11 +115,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 progress: undefined,
             });
 
+            setLoadingLogin(false)
+
         }
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, isAuthenticated, user, signOut }}>
+        <AuthContext.Provider value={{ signIn, isAuthenticated, user, signOut, loadingLogin }}>
             {children}
         </AuthContext.Provider>
     )

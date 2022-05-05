@@ -14,7 +14,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
-  const { signIn } = useContext(AuthContext)
+  const { signIn, loadingLogin } = useContext(AuthContext)
 
   async function handleSubmit(e: FormEvent) {
 
@@ -82,6 +82,7 @@ export default function Login() {
               colorScheme="blue"
               fontWeight="400"
               h="12"
+              isLoading={loadingLogin}
             >
               Entrar
             </Button>
