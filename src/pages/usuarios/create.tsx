@@ -23,7 +23,7 @@ export default function CreateUser() {
             <Grid templateColumns='1fr 4fr'>
                 <Sidebar user={user} />
                 <Box>
-                     title="Usuários" description="Gerencie os usuários do seu setor"/>
+                    <Header />
                     <CreateUserForm />
                 </Box>
             </Grid>
