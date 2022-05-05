@@ -22,7 +22,7 @@ export default function Usuarios() {
             <Grid templateColumns='1fr 4fr'>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Usuários" description="Gerencie os usuários do seu setor"/>
+                    <Header />
 
                     <TableUsers />
                     

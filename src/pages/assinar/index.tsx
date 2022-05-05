@@ -23,7 +23,7 @@ export default function Assinar() {
             <Grid templateColumns={{ base: '1fr', md: '1fr 4fr' }}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Assinar documentos" description="Assine documentos com sua assinatura digital" />
+                    <Header/>
 
                     <SignPdf />
 
