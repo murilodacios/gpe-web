@@ -17,12 +17,11 @@ export default function Painel() {
             <Head>
                 <title>Minhas tarefas - Gerenciador Público Eletrônico</title>
             </Head>
-            <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
+            <Grid templateColumns={{base: '1fr', md: '1fr 5fr'}}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Minhas tarefas" description="Gerencie suas tarefas diárias"/>
+                    <Header />
                     <TableTasks />
-                    
                 </Box>
             </Grid>
 

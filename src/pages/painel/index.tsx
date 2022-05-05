@@ -17,7 +17,7 @@ export default function Painel() {
             <Head>
                 <title>Painel - Gerenciador Público Eletrônico</title>
             </Head>
-            <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
+            <Grid templateColumns={{base: '1fr', md: '1fr 5fr'}}>
                 <Sidebar user={user} />
                 <Box>
                     <Header title="Página Inicial" description="Seu Gerenciador Público Eletrônico"/>

@@ -19,10 +19,10 @@ export default function CreateTask() {
                 <title>Criar nova tarefa - Gerenciador Público Eletrônico</title>
             </Head>
 
-            <Grid templateColumns='1fr 4fr'>
+            <Grid templateColumns='1fr 5fr'>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Criar tarefa" description="Crie metas diárias em formato de tarefas"/>
+                    <Header />
                     <CreateTaskForm />
                 </Box>
             </Grid>

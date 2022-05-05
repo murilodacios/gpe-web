@@ -94,7 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setUser(user)
 
-            Router.push('/painel')
+            window.location.href = `${window.location.href}/painel`
 
         } catch (err) {
 

@@ -32,9 +32,8 @@ export function CreateUserForm() {
             name: data.name,
             email: data.email,
             password: data.password,
-            permissions: "",
+            permissions: "default",
             level: parseInt(data.level),
-            job_id: data.job_id
         }
 
         await handleCreateNewUser(dataNew)
@@ -60,11 +59,6 @@ export function CreateUserForm() {
                                 <option value={1}>Administrador</option>
                             </Select>
                         </FormControl>
-
-                        <FormControl>
-                            <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='password'>Digite uma senha</FormLabel>
-                            <Input required id='password' type='text' {...register("password")} />
-                        </FormControl>
                     </HStack>
 
                     <HStack align="center" pt="2">
@@ -74,11 +68,10 @@ export function CreateUserForm() {
                         </FormControl>
 
                         <FormControl>
-                            <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='job'>Cargo</FormLabel>
-                            <Select required id='job' placeholder='Escolha um cargo' defaultValue="6673e5c6-b3b3-4c63-b120-e14ef6f83801" {...register("job_id")}>
-                                <option value="6673e5c6-b3b3-4c63-b120-e14ef6f83801">Comissionado</option>
-                            </Select>
+                            <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='password'>Digite uma senha</FormLabel>
+                            <Input required id='password' type='text' {...register("password")} />
                         </FormControl>
+
                     </HStack>
 
                     <HStack py="6">

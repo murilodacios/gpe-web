@@ -18,10 +18,10 @@ export default function Pagamentos() {
             <Head>
                 <title>Pagamentos - Gerenciador Público Eletrônico</title>
             </Head>
-            <Grid templateColumns={{base: '1fr', md: '1fr 4fr'}}>
+            <Grid templateColumns={{ base: '1fr', md: '1fr 5fr' }}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Pagamentos" description="Relatório de fornecedores"/>
+                    <Header />
                     <TablePayments />
                 </Box>
             </Grid>

@@ -14,11 +14,12 @@ import {
 
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { RiAddLine, RiDeleteBin7Line,  } from "react-icons/ri";
+import { RiAddLine, RiDeleteBin7Line, } from "react-icons/ri";
 import { useTasks } from "../../hooks/tasksContext";
 import { convertISOtoDate } from "../../utils/convertISOtoDate";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CreateTaskForm } from "./CreateTaskForm";
 
 
 export function TableTasks() {
@@ -36,23 +37,10 @@ export function TableTasks() {
     return (
         <>
             <ToastContainer />
-            <Stack w="100%" p="6" spacing="3">
-                <Text fontSize="16" color="gray.600">Suas tarefas do dia</Text>
-
-                <HStack py="4">
-                    <Link href="/tarefas/create">
-                        <a>
-                            <Button colorScheme="blue" variant="outline">
-                                <HStack spacing="2">
-                                    <Icon as={RiAddLine} />
-                                    <Text>Adicionar tarefa</Text>
-                                </HStack>
-                            </Button>
-                        </a>
-                    </Link>
-                </HStack>
-
-
+            <Stack w="100%" px="6" py="4" spacing="12">
+               
+                <CreateTaskForm />
+               
                 <Table variant='simple'>
                     <Thead>
                         <Tr>
@@ -74,7 +62,7 @@ export function TableTasks() {
                                     </Checkbox>
                                 </Td>
                                 <Td>
-                                    <Icon as={RiDeleteBin7Line} cursor="pointer" fontSize="16" _hover={{color: "red.500"}} onClick={() => handleRemoveTask(task.id)}/>
+                                    <Icon as={RiDeleteBin7Line} cursor="pointer" fontSize="16" _hover={{ color: "red.500" }} onClick={() => handleRemoveTask(task.id)} />
                                 </Td>
                             </Tr>
                         ))

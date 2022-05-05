@@ -40,10 +40,10 @@ export default function Demanda() {
             <Grid templateColumns={{ base: '1fr', md: '1fr 4fr' }}>
                 <Sidebar user={user} />
                 <Box>
-                    <Header title="Controle Público e PGM" description="Controle de demandas do Ministério Público e PGM" />
+                    <Header />
 
                     {demands && demands?.filter(demandArray => demandArray.id === id).map(demand => (
-                        <Stack key={demand?.id} p="6" bg="linear-gradient(122.57deg, #FCFCFC -17.82%, rgba(252, 252, 252, 0) 145.47%);">
+                        <Stack key={demand?.id} p="6">
 
                             <HStack py="5">
                                 <Icon as={RiEyeLine} color="gray.500" />

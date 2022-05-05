@@ -5,17 +5,6 @@ import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { useAuthenticate } from "./AuthContext";
 
-type Month = {
-    id: string;
-    name: string;
-    numeric_month: number;
-}
-
-type Secretary = {
-    id: string;
-    name: string;
-}
-
 interface Payment {
     id: string;
     empresa: string
@@ -27,8 +16,9 @@ interface Payment {
     pago: string
     month_id: string
     secretary_id: string
-    month: Month
-    secretary: Secretary
+    month: string
+    secretary: string
+    year: string
 }
 
 
@@ -38,21 +28,22 @@ type PaymentsProviderProps = {
 
 type PaymentsContextData = {
     payments: Payment[];
-    months: Month[];
-    secretaries: Secretary[];
-    selectMonth(month_id: string): void;
+    selectMonth(month: string): void;
+    selectYear(year: string): void;
     createPayment(data: Payment): Promise<Payment | undefined>;
+    setTakesLoadingPayments(value: number): void;
 }
 
 export const PaymentsContext = createContext({} as PaymentsContextData)
 
 export function PaymentsProvider({ children }: PaymentsProviderProps) {
 
-    const [payments, setPayments] = useState<Payment[]>([])
-    const [months, setMonths] = useState<Month[]>([])
-    const [secretaries, setSecretaries] = useState<Secretary[]>([])
+    const [takes, setTakes] = useState(10)
 
-    const [month_id, setSelectedMonth] = useState("")
+    const [payments, setPayments] = useState<Payment[]>([])
+
+    const [month, setSelectedMonth] = useState("")
+    const [year, setSelectedYear] = useState("")
 
     const { isAuthenticated } = useAuthenticate()
 
@@ -61,57 +52,48 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
     useEffect(() => {
 
         if (cookies["dashtwo:token"]) {
-            api.get(`/payments${month_id ? `?month_id=${month_id}` : ""}`).then((response) => {
+            api.get(`/payments${month ? `?month=${month}&takes=${takes}` : `?takes=${takes}`}${year && month ? `&year=${year}` : ""}${year && !month ? `?year=${year}` : ""}`).then((response) => {
                 const paymentData = response.data
 
                 setPayments(paymentData)
             })
         }
 
-    }, [isAuthenticated, month_id])
+    }, [isAuthenticated, month, year, takes])
 
-    useEffect(() => {
 
-        if (cookies["dashtwo:token"]) {
-            api.get(`/payments/months`).then((response) => {
-                const monthsData = response.data
 
-                setMonths(monthsData)
-            })
-        }
+    function selectMonth(month: string): void {
+        setSelectedMonth(month)
+        setTakes(10)
+    }
 
-    }, [isAuthenticated])
+    function selectYear(year: string): void {
+        setSelectedYear(year)
+        setTakes(10)
+    }
 
-    useEffect(() => {
+    function setTakesLoadingPayments(value: number) {
 
-        if (cookies["dashtwo:token"]) {
-            api.get(`/payments/secretaries`).then((response) => {
-                const secretariesData = response.data
+        let loadingTakes = takes + value
 
-                setSecretaries(secretariesData)
-            })
-        }
-
-    }, [isAuthenticated])
-
-    function selectMonth(month_id: string): void {
-        setSelectedMonth(month_id)
+        setTakes(loadingTakes)
     }
 
     async function createPayment(data: Payment): Promise<Payment | undefined> {
 
-        const { assunto, empresa, fonte, month_id, pago, processo, referencia, secretary_id, valor } = data
+        const { assunto, empresa, fonte, month, pago, processo, referencia, secretary, valor } = data
 
         let valorParsed = parseFloat(valor)
 
         try {
-            const payment = await api.post("/payments", { assunto, empresa, fonte, month_id, pago, processo, referencia, secretary_id, valor: valorParsed })
+            const payment = await api.post("/payments", { assunto, empresa, fonte, month, pago, processo, referencia, secretary, valor: valorParsed })
 
             const paymentData = payment.data
 
             setPayments([paymentData, ...payments])
 
-            Router.push(`/pagamentos`)
+            toast.success("Pagamento criado com sucesso")
 
             return paymentData
 
@@ -125,7 +107,7 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
 
 
     return (
-        <PaymentsContext.Provider value={{ payments, selectMonth, months, secretaries, createPayment }}>
+        <PaymentsContext.Provider value={{ payments, selectMonth, createPayment, selectYear, setTakesLoadingPayments }}>
             {children}
         </PaymentsContext.Provider>
     )

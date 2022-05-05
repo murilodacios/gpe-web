@@ -3,6 +3,7 @@ import {
     FormControl,
     FormLabel,
     HStack,
+    Icon,
     Input,
     Stack,
     Text,
@@ -14,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from "react-hook-form";
 
 import { useTasks } from "../../hooks/tasksContext";
+import { RiAddLine } from "react-icons/ri";
 
 
 export function CreateTaskForm() {
@@ -28,26 +30,21 @@ export function CreateTaskForm() {
 
     return (
         <>
-            <ToastContainer />
-            <Stack w="100%" p="6" spacing="3" h="100vh">
-                <Text fontSize="16" color="gray.600">Criar nova tarefa - <Link href="/tarefas"><a>Voltar à listagem</a></Link></Text>
+            <HStack as="form" onSubmit={handleSubmit(onSubmit)} align="center" justify="center">
 
-        
-                <Stack as="form" pt="2" onSubmit={handleSubmit(onSubmit)}>
-                    <HStack align="center" py="4">
-                        <FormControl>
-                            <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='description'>Descrição</FormLabel>
-                            <Input id='description' type='text' {...register("description")} required />
-                        </FormControl>
+                <FormControl>
+                    <Input variant="flushed" id='description' type='text' {...register("description")} required placeholder="O que deseja fazer hoje?" fontSize="sm"/>
+                </FormControl>
+
+                <Button colorScheme="blue" type="submit" px="8">
+                    <HStack spacing="2">
+                        <Icon as={RiAddLine} />
+                        <Text fontWeight="normal">Adicionar tarefa</Text>
                     </HStack>
+                </Button>
 
-                    <HStack py="6">
-                        <Button type='submit'>Criar tarefa</Button>
-                    </HStack>
-                </Stack>
+            </HStack>
 
-
-            </Stack>
         </>
     )
 }

@@ -58,8 +58,6 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
             setTasks([taskResponse, ...tasks])
 
-            toast.success("Tarefa criada com sucesso")
-
             Router.push(`/tarefas`)
 
             return taskResponse

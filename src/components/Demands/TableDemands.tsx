@@ -45,16 +45,19 @@ export function TableDemands() {
     return (
         <>
             <Stack w="100%" p="6" spacing="3">
-                <Text fontSize="16" color="gray.600">Controle Público e PGM - Todas as demandas</Text>
+
+                <HStack d="flex" as="form" onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} >
+                    <Input variant="flushed" type='text' placeholder='Busca por assunto' {...register("searchdemand")} />
+                </HStack>
 
                 {user && user.level === 1 ?
                     <HStack py="4">
                         <Link href="/demandas/create">
                             <a>
-                                <Button colorScheme="blue" variant="outline">
+                                <Button w="100%" size="sm" colorScheme="blue">
                                     <HStack spacing="2">
                                         <Icon as={RiAddLine} />
-                                        <Text>Criar nova demanda</Text>
+                                        <Text fontWeight="normal">Criar demanda</Text>
                                     </HStack>
                                 </Button>
                             </a>
@@ -62,15 +65,8 @@ export function TableDemands() {
                     </HStack>
 
                     :
-
                     ""
                 }
-
-
-
-                <HStack d="flex" as="form" onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} >
-                    <Input type='text' placeholder='Busca por assunto' {...register("searchdemand")} />
-                </HStack>
 
                 <Stack d={{ base: "flex", md: "none" }}>
                     {!watch("searchdemand") ? demands.map((demand) => (

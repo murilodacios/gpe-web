@@ -1,100 +1,67 @@
 import {
-    Avatar,
-    Box,
     HStack,
     Icon,
     Stack,
     Text,
-    Tooltip,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
-    Tag,
-    Input,
-    InputGroup,
-    InputLeftAddon,
     Button,
-    Checkbox,
-    IconButton,
     Select,
+    TableCaption,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { RiAddLine, RiCheckLine, RiDeleteBackFill, RiDeleteBin7Line, RiEyeLine, RiSearchLine } from "react-icons/ri";
-import { useAuthenticate } from "../../hooks/AuthContext";
-import { useTasks } from "../../hooks/tasksContext";
-import { useUsers } from "../../hooks/usersContext";
+import { RiLoader2Fill } from "react-icons/ri";
 import { convertISOtoDate } from "../../utils/convertISOtoDate";
-import { isPastedDate } from "../../utils/isPastedDate";
-import { isTodayDate } from "../../utils/isTodayDate";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePayments } from "../../hooks/PaymentsContext";
-
+import { CreatePaymentForm } from "./CreatePaymentForm";
 
 export function TablePayments() {
 
-    const { payments, months, selectMonth } = usePayments()
-
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { payments, selectMonth, selectYear, setTakesLoadingPayments } = usePayments()
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data: any) => {
-        selectMonth(data.month_id)
+        selectMonth(data.month)
+        selectYear(data.year)
     }
-
-
-    const summary = payments.reduce((acc, payment) => {
-        acc.total += parseFloat(payment.valor)
-        return acc
-    }, {
-        total: 0
-    })
-
 
     return (
         <>
             <ToastContainer />
             <Stack w="100%" p="6" spacing="3">
 
-                <HStack py="4">
-                    <Link href="/pagamentos/create">
-                        <a>
-                            <Button colorScheme="blue" variant="outline">
-                                <HStack spacing="2">
-                                    <Icon as={RiAddLine} />
-                                    <Text>Criar novo pagamento</Text>
-                                </HStack>
-                            </Button>
-                        </a>
-                    </Link>
-                </HStack>
-
-                <Stack>
-                    <Text>Total pago</Text>
-                    <Text>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(summary.total)}</Text>
-                </Stack>
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Text>Selecione o mês que deseja visualizar os pagamentos</Text>
                     <HStack py="4">
-                        <Select defaultValue="" {...register("month_id")}>
+                        <Select defaultValue="" {...register("month")}>
                             <option value="">Todos os pagamentos</option>
-                            {months.map(month =>
-                                <option key={month.id} value={`${month.id}`}>{month.name}</option>
-                            )}
+                            <option value="Janeiro">Janeiro</option>
+                            <option value="Fevereiro">Fevereiro</option>
+                            <option value="Março">Março</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Maio">Maio</option>
+                            <option value="Junho">Junho</option>
                         </Select>
-                        <Button type="submit">Selecionar</Button>
+                        <Select defaultValue="2022" {...register("year")}>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="">Todos os anos</option>
+                        </Select>
+                        <Button type="submit" px="12">Selecionar</Button>
                     </HStack>
                 </form>
 
-                <Table variant='simple'>
+                <HStack py="4">
+                    <CreatePaymentForm />
+                </HStack>
+
+                <Table variant='simple' w="100%">
                     <Thead>
                         <Tr>
                             <Th>Processo</Th>
@@ -107,18 +74,18 @@ export function TablePayments() {
                             <Th>Pago</Th>
                         </Tr>
                     </Thead>
-                    <Tbody>
+                    <Tbody fontSize="sm">
 
                         {payments.map((payment) => (
-                            <Tr key={payment.id} fontSize="sm">
+                            <Tr key={payment.id} fontSize="xs">
                                 <Td>{payment.processo}</Td>
                                 <Td>{payment.empresa}</Td>
                                 <Td>
                                     {payment.assunto}
                                 </Td>
-                                <Td>{payment.fonte}</Td>
+                                <Td >{payment.fonte}</Td>
                                 <Td>{payment.referencia}</Td>
-                                <Td>{payment.secretary.name}</Td>
+                                <Td>{payment.secretary}</Td>
                                 <Td>
                                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(payment.valor)}
                                 </Td>
@@ -127,7 +94,18 @@ export function TablePayments() {
                         ))
                         }
                     </Tbody>
+
+                    <TableCaption>Exibindo {payments.length} itens</TableCaption>
                 </Table>
+
+                <HStack>
+                    <Button onClick={() => setTakesLoadingPayments(5)} size="sm" variant="ghost">
+                        <HStack spacing="2">
+                            <Icon as={RiLoader2Fill} />
+                            <Text fontWeight="normal">Carregar mais</Text>
+                        </HStack>
+                    </Button>
+                </HStack>
 
             </Stack>
         </>
