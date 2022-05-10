@@ -70,7 +70,7 @@ export function HomePainel({ user }: HomePainelProps) {
 
                         <Stack direction={{ base: "column", md: "row" }}>
 
-                            {user && user.level === 1 ?
+                            {user && user.level > 0 ?
                                 <Link href="/demandas/create">
                                     <a>
                                         <Button w="100%" size="sm" colorScheme="blue">

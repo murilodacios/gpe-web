@@ -104,7 +104,7 @@ export function TablePayments() {
 
                 {/* <iframe title="BIPostgresGPE" width="100%" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=96bc6d5e-c511-423c-bd2a-d742a62f41f6&autoAuth=true&ctid=6c7045de-414e-4b53-8f50-9d4afa293fc0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" allowFullScreen></iframe> */}
 
-                {Number(user?.level) >= 1 ?
+                {Number(user?.level) > 0 ?
                     <HStack py="4">
                         <CreatePaymentForm />
 
