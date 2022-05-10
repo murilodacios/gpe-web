@@ -45,7 +45,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         if (token) {
 
             try {
-
                 //@ts-ignore
                 api.defaults.headers.Authorization = `Bearer ${token}`;
                 api.get(`/users/me/${userEmail}`).then(response => {
@@ -53,16 +52,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     const { email, name, level, id } = response.data
 
                     setUser({ email, name, level, id })
-
                     setLoadingLogin(false)
-
                 })
-
 
             } catch (err) {
                 console.log(err)
             }
-
         }
 
     }, [])
@@ -70,6 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async function signOut(): Promise<void> {
         destroyCookie(undefined, "dashtwo:token");
         destroyCookie(undefined, "dashtwo:user");
+        destroyCookie(undefined, "lev");
         Router.push('/')
     }
 
@@ -92,6 +88,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
             })
 
             setCookie(undefined, 'dashtwo:user', email, {
+                maxAge: 60 * 60 * 24 * 30,
+                path: '/'
+            })
+
+            setCookie(undefined, 'lev', user.level, {
                 maxAge: 60 * 60 * 24 * 30,
                 path: '/'
             })

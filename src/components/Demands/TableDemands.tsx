@@ -37,6 +37,16 @@ export function TableDemands() {
     const { register, handleSubmit, watch } = useForm();
     const [data, setData] = useState("")
 
+    const [itensPerPage, setItensPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const pages = Math.ceil(demands.length / itensPerPage);
+
+    const startIndex = currentPage * itensPerPage;
+    const endIndex = startIndex + itensPerPage;
+
+    const currentItens = demands.slice(startIndex, endIndex);
+
     async function handleSeenAndPushToDemand(demandId: string, userId: string) {
         await seenDemand(userId, demandId)
         Router.push(`/demandas/${demandId}`)
@@ -69,7 +79,7 @@ export function TableDemands() {
                 }
 
                 <Stack d={{ base: "flex", md: "none" }}>
-                    {!watch("searchdemand") ? demands.map((demand) => (
+                    {!watch("searchdemand") ? currentItens.map((demand) => (
                         <Stack border="1px solid #eee" p="4" key={demand.id}>
                             <Text><Text fontWeight="bold">{demand.tipo} {demand.numero}</Text>{demand.assunto}</Text>
                             <Text>{isTodayDate(demand.prazo_resposta) && demand.status !== "Respondido" ? <Tag colorScheme="red">Vence hoje</Tag> : demand?.status === null ? isPastedDate(demand.prazo_resposta) ? <Tag colorScheme="orange">Atrasado</Tag> : "Sem status" : <Tag colorScheme="green">{demand?.status}</Tag>}</Text>
@@ -127,7 +137,7 @@ export function TableDemands() {
                     </Thead>
                     <Tbody>
 
-                        {!watch("searchdemand") ? demands.map((demand) => (
+                        {!watch("searchdemand") ? currentItens.map((demand) => (
                             <Tr key={demand.id} fontSize="sm">
                                 <Td>{demand.tipo} {demand.numero} - {demand.assunto}</Td>
                                 <Td>{isTodayDate(demand.prazo_resposta) && demand.status !== "Respondido" ? <Tag colorScheme="red">Vence hoje</Tag> : demand?.status === null ? isPastedDate(demand.prazo_resposta) ? <Tag colorScheme="orange">Atrasado</Tag> : "Sem status" : <Tag colorScheme="green">{demand?.status}</Tag>}</Td>
@@ -178,7 +188,14 @@ export function TableDemands() {
                     </Tbody>
                 </Table>
 
+                <HStack align="center" justify="center">
+                    {Array.from(Array(pages), (item, index) => {
+                        return <Button bg={index === currentPage ? "blue.200" : ""} size="xs" value={index} onClick={(e) => setCurrentPage(Number(index))}>{index + 1}</Button>
+                    })}
+                </HStack>
+
             </Stack>
+
         </>
     )
 }

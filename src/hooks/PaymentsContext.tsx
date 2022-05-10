@@ -32,6 +32,7 @@ type PaymentsContextData = {
     selectYear(year: string): void;
     createPayment(data: Payment): Promise<Payment | undefined>;
     setTakesLoadingPayments(value: number): void;
+    reportAllPayments(): Promise<Payment[] | undefined>;
 }
 
 export const PaymentsContext = createContext({} as PaymentsContextData)
@@ -45,7 +46,7 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
     const [month, setSelectedMonth] = useState("")
     const [year, setSelectedYear] = useState("")
 
-    const { isAuthenticated } = useAuthenticate()
+    const { isAuthenticated, user } = useAuthenticate()
 
     const cookies = parseCookies()
 
@@ -61,7 +62,20 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
 
     }, [isAuthenticated, month, year, takes])
 
+    async function reportAllPayments(): Promise<Payment[] | undefined> {
 
+        try {
+            const payments = await api.get(`/payments/report${month ? `?month=${month}` : ``}${year && month ? `&year=${year}` : ""}${year && !month ? `?year=${year}` : ""}`)
+
+            const paymentData = payments.data
+
+            return paymentData
+
+        } catch {
+            console.log("Não foi possível gerar o relatório de pagamentos")
+
+        }
+    }
 
     function selectMonth(month: string): void {
         setSelectedMonth(month)
@@ -86,6 +100,10 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
 
         let valorParsed = parseFloat(valor)
 
+        if(user?.level < 1) {
+            toast.error("Você não tem permissão para criar pagamentos")
+        }
+
         try {
             const payment = await api.post("/payments", { assunto, empresa, fonte, month, pago, processo, referencia, secretary, valor: valorParsed })
 
@@ -102,12 +120,12 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
             toast.error("Não foi possível criar o pagamento")
         }
 
-        
+
     }
 
 
     return (
-        <PaymentsContext.Provider value={{ payments, selectMonth, createPayment, selectYear, setTakesLoadingPayments }}>
+        <PaymentsContext.Provider value={{ reportAllPayments, payments, selectMonth, createPayment, selectYear, setTakesLoadingPayments }}>
             {children}
         </PaymentsContext.Provider>
     )

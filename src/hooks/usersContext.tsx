@@ -10,7 +10,6 @@ interface User {
     email: string;
     name: string;
     level: number;
-    permissions: string;
 }
 
 type UsersProviderProps = {

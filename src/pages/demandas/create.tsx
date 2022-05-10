@@ -43,6 +43,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         }
     }
 
+    const level = cookies["lev"];
+
+    if (Number(level) < 1) {
+        return {
+            redirect: {
+                destination: '/painel',
+                permanent: false
+            }
+        }
+    }
+
     return {
         props: {}
     }

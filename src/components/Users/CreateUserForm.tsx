@@ -32,8 +32,7 @@ export function CreateUserForm() {
             name: data.name,
             email: data.email,
             password: data.password,
-            permissions: "default",
-            level: parseInt(data.level),
+            level: Number(data.level),
         }
 
         await handleCreateNewUser(dataNew)
@@ -56,7 +55,8 @@ export function CreateUserForm() {
                             <FormLabel color="#909090" fontWeight="normal" fontSize="sm" htmlFor='tipo'>Tipo de permissão</FormLabel>
                             <Select required id='tipo' placeholder='Selecione o tipo de permissão' defaultValue={0} {...register("level")}>
                                 <option value={0}>Padrão</option>
-                                <option value={1}>Administrador</option>
+                                <option value={1}>Gestor</option>
+                                <option value={2}>Administrador</option>
                             </Select>
                         </FormControl>
                     </HStack>

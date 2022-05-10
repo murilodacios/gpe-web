@@ -1,13 +1,14 @@
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { useAuthenticate } from '../../hooks/AuthContext'
+import jwt_decode from "jwt-decode";
 
 import { Box, Grid } from '@chakra-ui/react'
 import { Sidebar } from '../../components/Sidebar'
 import { Header } from '../../components/Header'
 import Head from 'next/head'
-import { TableTasks } from '../../components/Tasks/TableTasks'
 import { TablePayments } from '../../components/Payments/TablePayments'
+import { useRouter } from 'next/router'
 
 export default function Pagamentos() {
 
@@ -34,10 +35,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const cookies = parseCookies(ctx)
 
+    const level = cookies["lev"];
+
     if (!cookies['dashtwo:token']) {
         return {
             redirect: {
                 destination: '/',
+                permanent: false
+            }
+        }
+    }
+
+    if (Number(level) < 1) {
+        return {
+            redirect: {
+                destination: '/painel',
                 permanent: false
             }
         }

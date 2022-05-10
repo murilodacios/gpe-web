@@ -57,10 +57,10 @@ export function TableUsers() {
                     <Tbody>
 
                         {usersList.map((user) => (
-                            <Tr key={user.id} fontSize="sm" color={user.level === 1 ? "yellow.600" : ""}>
+                            <Tr key={user.id} fontSize="sm" color={user.level > 0 ? "yellow.600" : ""}>
                                 <Td>{user.name}</Td>
                                 <Td>{user.email}</Td>
-                                <Td>{user.level === 1 ? "Administrador" : "Padrão"}</Td>
+                                <Td>{user.level > 0 ? "Administrador" : "Padrão"}</Td>
                             </Tr>
                         ))
                         }

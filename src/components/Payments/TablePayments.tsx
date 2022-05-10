@@ -12,24 +12,69 @@ import {
     Button,
     Select,
     TableCaption,
+    Box,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { RiLoader2Fill } from "react-icons/ri";
+import { RiDownload2Line, RiLoader2Fill } from "react-icons/ri";
 import { convertISOtoDate } from "../../utils/convertISOtoDate";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePayments } from "../../hooks/PaymentsContext";
 import { CreatePaymentForm } from "./CreatePaymentForm";
+import { useAuthenticate } from "../../hooks/AuthContext";
+
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable';
+
+
+
 
 export function TablePayments() {
 
-    const { payments, selectMonth, selectYear, setTakesLoadingPayments } = usePayments()
-    const { register, handleSubmit } = useForm();
+    const { payments, selectMonth, selectYear, setTakesLoadingPayments, reportAllPayments } = usePayments()
+    const { register, handleSubmit, watch } = useForm();
+    const { user } = useAuthenticate()
 
     const onSubmit = async (data: any) => {
         selectMonth(data.month)
         selectYear(data.year)
     }
+
+    async function handleViewReport() {
+
+        const paymentReport = await reportAllPayments()
+
+        const doc = new jsPDF({
+            orientation: "landscape",
+        })
+
+
+        doc.setFontSize(9)
+        doc.text(`Relatório de pagamento de fornecedores (Mês: ${watch("month") ? watch("month") : "Todos os meses"})  (${watch("year") ? watch("year") : "Todos os anos"}) - Gerado dia ${new Date().toLocaleDateString()}`, 15, 10)
+
+        autoTable(doc, {
+            head: [['Processo', 'Empresa', 'Assunto', 'Fonte', 'Referência', 'Secretaria', 'Valor', 'Pago']],
+            body: paymentReport?.map((payment) => [
+                [payment.processo],
+                [payment.empresa],
+                [payment.assunto],
+                [payment.fonte],
+                [payment.referencia],
+                [payment.secretary],
+                {
+                    content: [new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(payment.valor)],
+                    styles: {
+                        overflow: 'visible',
+                        cellWidth: 40,
+                    }
+                },
+                [convertISOtoDate(payment.pago)]
+            ]),
+        })
+
+        doc.save(`${new Date().toLocaleDateString().trim()}-Fornecedores.pdf`)
+    }
+
 
     return (
         <>
@@ -57,11 +102,28 @@ export function TablePayments() {
                     </HStack>
                 </form>
 
-                <HStack py="4">
-                    <CreatePaymentForm />
-                </HStack>
+                {/* <iframe title="BIPostgresGPE" width="100%" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=96bc6d5e-c511-423c-bd2a-d742a62f41f6&autoAuth=true&ctid=6c7045de-414e-4b53-8f50-9d4afa293fc0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" allowFullScreen></iframe> */}
 
-                <Table variant='simple' w="100%">
+                {Number(user?.level) >= 1 ?
+                    <HStack py="4">
+                        <CreatePaymentForm />
+
+                        <Box>
+                            <Button w="100%" size="sm" colorScheme="blue" variant="ghost" onClick={() => handleViewReport()}>
+                                <HStack spacing="2">
+                                    <Icon as={RiDownload2Line} />
+                                    <Text fontWeight="normal">Relatório</Text>
+                                </HStack>
+                            </Button>
+                        </Box>
+                    </HStack>
+                    :
+                    <></>
+                }
+
+
+
+                <Table variant='simple' w="100%" id="#pagamentos">
                     <Thead>
                         <Tr>
                             <Th>Processo</Th>

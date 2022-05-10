@@ -7,7 +7,8 @@ import {
     Link,
     Flex,
     SkeletonCircle,
-    SkeletonText
+    SkeletonText,
+    Image
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -42,7 +43,9 @@ export function Header() {
                         <>
                             <Menu>
                                 <MenuButton>
-                                    <Avatar name={user?.name} size="md" />
+                                    <Box w="50px">
+                                        <Image src="/avatar.jpg" borderRadius="50%"/>
+                                    </Box>
                                 </MenuButton>
                                 <MenuList>
                                     <MenuItem><Link href="/">Painel</Link></MenuItem>
