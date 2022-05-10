@@ -149,7 +149,7 @@ export default function Demanda() {
                             </Stack>
 
                             <Stack pt="8" direction={{ base: "column", md: "row" }}>
-                                {user && user.level === 1 ?
+                                {user && user.level > 0 ?
                                     <Button onClick={() => handleCheckResponse(demand?.id)} colorScheme="green" variant={demand?.data_resposta === null ? "solid" : "outline"}>
                                         <HStack spacing="2">
                                             <Icon as={RiCheckLine} />
@@ -162,7 +162,7 @@ export default function Demanda() {
                                     ""
                                 }
 
-                                {user && user.level === 1 ?
+                                {user && user.level > 0 ?
                                     <AddPeopleToDemand demandId={demand.id} />
 
                                     :
@@ -170,7 +170,7 @@ export default function Demanda() {
                                     ""
                                 }
 
-                                {user && user.level === 1 ?
+                                {user && user.level > 0 ?
                                     <AddAnotationToDemandModal id={demand.id} />
 
                                     :
