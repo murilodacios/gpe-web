@@ -100,10 +100,6 @@ export function PaymentsProvider({ children }: PaymentsProviderProps) {
 
         let valorParsed = parseFloat(valor)
 
-        if(user?.level < 1) {
-            toast.error("Você não tem permissão para criar pagamentos")
-        }
-
         try {
             const payment = await api.post("/payments", { assunto, empresa, fonte, month, pago, processo, referencia, secretary, valor: valorParsed })
 

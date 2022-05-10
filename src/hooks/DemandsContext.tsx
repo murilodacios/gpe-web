@@ -94,10 +94,6 @@ export function DemandsProvider({ children }: DemandsProviderProps) {
 
     async function handleCreateNewDemand(data: Demand): Promise<Demand | undefined> {
 
-        if(user?.level < 1) {
-            toast.error("Você não tem permissão para criar pagamentos")
-        }
-
         try {
             const response = await api.post("/demands", data)
 
