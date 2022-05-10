@@ -60,7 +60,7 @@ export function TableDemands() {
                     <Input variant="flushed" type='text' placeholder='Busca por assunto' {...register("searchdemand")} />
                 </HStack>
 
-                {user && user.level === 1 ?
+                {user && user.level > 0 ?
                     <HStack py="4">
                         <Link href="/demandas/create">
                             <a>
